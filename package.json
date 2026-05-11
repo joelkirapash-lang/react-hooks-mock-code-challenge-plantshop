@@ -11,7 +11,7 @@
   "scripts": {
     "start": "react-scripts start",
     "server": "json-server --watch db.json -p 6001",
-    "test": "jest"
+    "test": "vitest run"
   },
   "eslintConfig": {
     "extends": [
@@ -30,5 +30,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^6.0.1",
+    "jsdom": "^29.1.1",
+    "vite": "^8.0.12",
+    "vitest": "^4.1.6"
   }
 }
