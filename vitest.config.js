@@ -17,5 +17,8 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.js'],
     include: ['src/**/*.{test,spec}.{js,jsx}'],
+    transformMode: {
+      web: [/\.[jt]sx?$/]
+    },
   },
 })
