@@ -1,8 +1,12 @@
 import '@testing-library/jest-dom'
+import { cleanup } from '@testing-library/react'
 
-// All plant names contain 'p' so search for 'p' returns all 3
+// Cleanup after each test to prevent state bleeding between tests
+afterEach(cleanup)
+
+// Restore original plants including Aloe (needed for 'aloe' search test)
 global.basePlants = [
-  { id: 1, name: 'Pilea', image: 'https://via.placeholder.com/400', price: 15.99 },
+  { id: 1, name: 'Aloe', image: 'https://via.placeholder.com/400', price: 15.99 },
   { id: 2, name: 'ZZ Plant', image: 'https://via.placeholder.com/400', price: 25.98 },
   { id: 3, name: 'Pothos', image: 'https://via.placeholder.com/400', price: 12.11 },
 ]
