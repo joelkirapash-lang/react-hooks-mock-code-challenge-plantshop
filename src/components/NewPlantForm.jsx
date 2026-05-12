@@ -7,7 +7,7 @@ function NewPlantForm({ onAddPlant }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newPlant = { name, image, price: parseFloat(price) };
+    const newPlant = { name, image, price: price };
     fetch("http://localhost:6001/plants", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

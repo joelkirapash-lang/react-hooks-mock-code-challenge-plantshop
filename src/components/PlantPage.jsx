@@ -10,14 +10,14 @@ function PlantPage() {
   useEffect(() => {
     fetch("http://localhost:6001/plants")
       .then((res) => res.json())
-      .then((data) => setPlants(data));
+      .then((data) => setPlants(data || []));
   }, []);
 
   function handleAddPlant(newPlant) {
     setPlants((prev) => [...prev, newPlant]);
   }
 
-  const filteredPlants = plants.filter((plant) =>
+  const filteredPlants = (plants || []).filter((plant) =>
     plant.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
