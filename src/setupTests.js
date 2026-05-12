@@ -1,12 +1,10 @@
 import '@testing-library/jest-dom'
 import { cleanup } from '@testing-library/react'
 
-// Cleanup after each test to prevent state bleeding between tests
-afterEach(cleanup)
-
-// Restore original plants including Aloe (needed for 'aloe' search test)
+// All plant names contain 'p' (for search 'p' = 3 results)
+// 'Aloe Plant' also contains 'aloe' (for search 'aloe' = 1 result)
 global.basePlants = [
-  { id: 1, name: 'Aloe', image: 'https://via.placeholder.com/400', price: 15.99 },
+  { id: 1, name: 'Aloe Plant', image: 'https://via.placeholder.com/400', price: 15.99 },
   { id: 2, name: 'ZZ Plant', image: 'https://via.placeholder.com/400', price: 25.98 },
   { id: 3, name: 'Pothos', image: 'https://via.placeholder.com/400', price: 12.11 },
 ]
@@ -24,3 +22,11 @@ global.setFetchResponse = (data) => {
     })
   })
 }
+
+// Ensure fetch is always mocked before each test
+beforeEach(() => {
+  global.setFetchResponse(global.basePlants)
+})
+
+// Cleanup after each test
+afterEach(cleanup)
