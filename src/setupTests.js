@@ -8,13 +8,17 @@ global.basePlants = [
 ]
 
 global.setFetchResponse = (data) => {
-  global.fetch = async function(url, options) {
+  vi.stubGlobal('fetch', vi.fn((url, options) => {
     if (options && options.method === 'POST') {
       const body = JSON.parse(options.body)
-      return { json: async () => ({ id: Date.now(), ...body }) }
+      return Promise.resolve({
+        json: () => Promise.resolve({ id: Date.now(), ...body })
+      })
     }
-    return { json: async () => (Array.isArray(data) ? data : []) }
-  }
+    return Promise.resolve({
+      json: () => Promise.resolve(Array.isArray(data) ? data : [])
+    })
+  }))
 }
 
 beforeEach(() => {
@@ -23,5 +27,5 @@ beforeEach(() => {
 
 afterEach(() => {
   cleanup()
-  vi.restoreAllMocks()
+  vi.unstubAllGlobals()
 })
